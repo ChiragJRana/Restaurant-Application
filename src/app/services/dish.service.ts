@@ -6,8 +6,14 @@ import { Dishes } from '../shared/dishes';
   providedIn: 'root'
 })
 export class DishService {
-  getDishes(): Dish[]{
-    return Dishes;
-  }
+    getDishes(): Dish[]{
+      return Dishes;
+    }
+    getDish(id:string):Dish {
+      return Dishes.filter((dish) => (dish.id === id))[0];
+    }
+    getFeaturedDish():Dish {
+      return Dishes.filter((dish) => dish.featured)[0];
+    }
   constructor() { }
 }
