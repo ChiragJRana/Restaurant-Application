@@ -23,6 +23,7 @@ import { MenuComponent } from './menu/menu.component';
 
 import { DishService } from './services/dish.service';
 import { PromotionService } from './services/promotion.service';
+import { LeadersService } from './services/leaders-service.service';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,7 @@ import { PromotionService } from './services/promotion.service';
     MatButtonModule,
     AppRoutingModule
   ],
-  providers: [ DishService,PromotionService],
+  providers: [ DishService,PromotionService,LeadersService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
