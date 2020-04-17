@@ -8,7 +8,9 @@ import {MatListModule} from '@angular/material/list';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatInputModule } from '@angular/material/input';
 import 'hammerjs';
 
 import { AppComponent } from './app.component';
@@ -25,6 +27,9 @@ import { DishService } from './services/dish.service';
 import { PromotionService } from './services/promotion.service';
 import { LeadersService } from './services/leaders-service.service';
 import { DialogComponent } from './dialog/dialog.component';
+import { FormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+
 
 @NgModule({
   declarations: [
@@ -48,7 +53,12 @@ import { DialogComponent } from './dialog/dialog.component';
     MatCardModule,
     MatButtonModule,
     AppRoutingModule,
-    MatDialogModule    
+    MatDialogModule,
+    // MatDialogRef,
+    FormsModule,
+    MatFormFieldModule,
+    MatCheckboxModule,
+    MatInputModule
   ],
   entryComponents:[
     DialogComponent

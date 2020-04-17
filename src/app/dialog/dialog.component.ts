@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef} from '@angular/material/dialog';
 @Component({
   selector: 'app-dialog',
@@ -6,10 +6,15 @@ import { MatDialog, MatDialogRef} from '@angular/material/dialog';
   styleUrls: ['./dialog.component.scss']
 })
 export class DialogComponent implements OnInit {
+  user= {username:'', password:'', remember:false};
 
-  constructor() { }
+  constructor(public dialogRef:MatDialogRef<DialogComponent>) { }
 
   ngOnInit(): void {
-  }
 
+  }
+  onSubmit(){
+    console.log('User: ', this.user);
+    this.dialogRef.close();
+  }
 }
