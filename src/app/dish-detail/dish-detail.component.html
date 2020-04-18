@@ -6,11 +6,11 @@
     fxLayoutGap="10px" 
     fxLayoutGap.xs="0">
 
-  <div fxFlex="40">
-    <mat-card *ngIf="dishi">
+  <div fxFlex="40" *ngIf="dishi">
+    <mat-card>
         <mat-card-header>
           <mat-card-title>
-            <h3>{{dishi.name | uppercase }}</h3>
+            <h3 *ngIf="dishi">{{dishi.name | uppercase }}</h3>
           </mat-card-title>
         </mat-card-header>
         <img mat-card-image src={{dishi.image}} alt={{dishi.name}}>
@@ -24,9 +24,11 @@
         </mat-card-actions>
       </mat-card>
   </div>
-
-  <div fxFlex="40">
-      <mat-card  *ngIf="dishi">
+  <div [hidden]="dishi">
+    <mat-spinner></mat-spinner><h4>Loading..... Please Wait</h4>
+  </div>
+  <div fxFlex="40" *ngIf="dishi">
+      <mat-card >
           <mat-card-header>
             <mat-card-header>
                 <h2>Comments</h2>

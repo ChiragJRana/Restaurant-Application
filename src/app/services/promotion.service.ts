@@ -6,14 +6,20 @@ import { Promotions } from '../shared/promotions';
   providedIn: 'root'
 })
 export class PromotionService {
-  getPromotions(): Promotion[]{
-    return Promotions;
+  getPromotions():Promise<Promotion[]>{
+    return new Promise((resolve) => {
+      setTimeout(() => {resolve(Promotions)},2000);
+    });
   }
-  getPromotion(id:string):Promotion {
-    return Promotions.filter((promo) => (promo.id === id))[0];
+  getPromotion(id:string):Promise<Promotion> {
+    return new Promise((resolve) => {
+      setTimeout(() => {resolve(Promotions.filter((promo) => (promo.id === id))[0])}, 2000);
+    });
   }
-  getFeaturedPromotion():Promotion {
-     return Promotions.filter((promotion) => promotion.featured)[0];
+  getFeaturedPromotion():Promise<Promotion> {
+     return new Promise((resolve) => {
+       setTimeout(() => {resolve(Promotions.filter((promotion) => promotion.featured)[0])},2000);
+     });
   }
   constructor() { }
 }
