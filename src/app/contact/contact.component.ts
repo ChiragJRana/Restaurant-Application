@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Feedback, ContactType } from '../shared/feedback';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-contact',
@@ -6,10 +8,30 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./contact.component.scss']
 })
 export class ContactComponent implements OnInit {
+  feedback: Feedback;
+  feedbackForm: FormGroup;
+  contactType = ContactType;
+  constructor(private fb: FormBuilder){
+    this.createForm();
+   }
+   
+  ngOnInit(): void { }
+  createForm(){
+    this.feedbackForm = this.fb.group({
+      firstname: '',
+      lastname: '',
+      telnum: 0,
+      email: '',
+      agree: false,
+      contacttype: 'None',
+      message: ''
+    });
+  }
+  onSubmit(){
+    this.feedback = this.feedbackForm.value;
+    console.log(this.feedback);
+    this.feedbackForm.reset();
 
-  constructor() { }
-
-  ngOnInit(): void {
   }
 
 }
