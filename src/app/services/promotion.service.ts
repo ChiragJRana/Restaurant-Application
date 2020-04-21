@@ -9,13 +9,13 @@ import { of, Observable } from 'rxjs';
 })
 export class PromotionService {
   getPromotions():Observable<Promotion[]>{
-    return of(Promotions).pipe(delay(2000));
+    return of(Promotions).pipe(delay(500));
   }
   getPromotion(id:string):Observable<Promotion> {
-    return of(Promotions.filter((promotion)=> promotion.id === id)[0]).pipe(delay(2000));
+    return of(Promotions.filter((promotion)=> promotion.id === id)[0]).pipe(delay(500));
   }
   getFeaturedPromotion():Observable<Promotion> {
-     return of(Promotions.filter( promotion => promotion.featured)[0]).pipe(delay(2000));
+     return of(Promotions.filter( promotion => promotion.featured)[0]).pipe(delay(500));
   }
   constructor() { }
 }

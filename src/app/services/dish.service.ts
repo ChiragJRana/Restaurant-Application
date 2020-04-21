@@ -8,13 +8,16 @@ import { delay } from 'rxjs/operators';
 })
 export class DishService {
     getDishes(): Observable<Dish[]>{
-      return of(Dishes).pipe(delay(2000));
+      return of(Dishes).pipe(delay(500));
     }
     getDish(id:string):Observable<Dish> {
-      return of(Dishes.filter(dish => dish.id === id)[0]).pipe(delay(2000));
+      return of(Dishes.filter(dish => dish.id === id)[0]).pipe(delay(500));
     }
     getFeaturedDish():Observable<Dish> {
-      return of(Dishes.filter(dish => dish.featured)[0]).pipe(delay(2000));
+      return of(Dishes.filter(dish => dish.featured)[0]).pipe(delay(500));
+    }
+    getDishIds(): Observable<string[] |any>{
+      return of(Dishes.map(dish => dish.id));
     }
   constructor() { }
 }

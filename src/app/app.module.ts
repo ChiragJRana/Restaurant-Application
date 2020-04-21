@@ -16,7 +16,7 @@ import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-
+import { MatSliderModule} from '@angular/material/slider';
 import { MatSelectModule } from '@angular/material/select';
 import  'hammerjs' ;
 
@@ -65,6 +65,7 @@ import { LeadersService } from './services/leaders-service.service';
     MatInputModule,
     MatSlideToggleModule,
     MatSelectModule,
+    MatSliderModule,
     MatProgressSpinnerModule
   ],
   entryComponents:[

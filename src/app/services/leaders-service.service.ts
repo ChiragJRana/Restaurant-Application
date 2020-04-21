@@ -10,14 +10,14 @@ import { delay }  from 'rxjs/operators';
 export class LeadersService {
   
   getLeaders():Observable<Leader[]>{
-    return  of(leaders).pipe(delay(2000));
+    return  of(leaders).pipe(delay(500));
   }
   getFeaturedLeader(): Observable<Leader>{
-    return of(leaders.filter((leader) => { return leader.featured})[0]).pipe(delay(2000));
+    return of(leaders.filter((leader) => { return leader.featured})[0]).pipe(delay(500));
     //  To be Noted  as {} ismei karoo return () naitoh its like a lambda function....
   }
   getleader(id:string):Observable<Leader>{
-    return of(leaders.filter((leader)=> (leader.id === id))[0]).pipe(delay(2000));
+    return of(leaders.filter((leader)=> (leader.id === id))[0]).pipe(delay(500));
   }
 
   constructor() { }
