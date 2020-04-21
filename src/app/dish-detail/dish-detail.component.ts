@@ -24,7 +24,10 @@ export class DishDetailComponent implements OnInit {
   commentform: FormGroup;
   comment: Comment;
   
-  
+  errMsgdishi: string;
+  errMsgDishId: string;
+  BaseURL: string;
+
   formErrors= {
     'author':'',
     'rating': '',
@@ -57,21 +60,27 @@ export class DishDetailComponent implements OnInit {
               private location: Location,
               private dishService: DishService,
               private fb: FormBuilder,
-              @Inject('BaseURL') private BaseURL) {
-    this.createForm();  
+              @Inject('BaseURL') BaseURL) {
+                this.BaseURL = BaseURL
+                this.createForm();  
       
   }
 
   ngOnInit(): void {
-    this.dishService.getDishIds().subscribe(dishIds => {
-      this.dishIds = dishIds; 
-      this.dishIdLen = this.dishIds.length
-    });
+    this.dishService.getDishIds().subscribe(
+      (dishIds) => {
+        this.dishIds = dishIds; 
+        this.dishIdLen = this.dishIds.length;},
+      (error) => (this.errMsgDishId = <any>error)
+      );
     this.route.params.pipe(switchMap( (params:Params) => this.dishService.getDish(params['id'])))
-      .subscribe((dish)=> {
+      .subscribe(
+        (dish)=> {
         this.dishi = dish;
         this.setPrevNext(dish.id);
-      });
+      },
+        (error) => (this.errMsgdishi = <any>error)
+      );
   }
 //=================================================================================================================
   goBack():void {

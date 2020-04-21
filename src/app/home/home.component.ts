@@ -15,11 +15,13 @@ export class HomeComponent implements OnInit {
   dish: Dish;
   promotion:Promotion;
   leader: Leader;
-
+  BaseURL : string;
   constructor(private promotionService:PromotionService,
               private dishService:DishService,
               private leaderService:LeadersService,
-              @Inject('BaseURL') private BaseURL) { }
+              @Inject('BaseURL')  BaseURL) {
+                  this.BaseURL = BaseURL
+               }
 
   ngOnInit(): void {
     

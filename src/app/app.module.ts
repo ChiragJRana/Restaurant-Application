@@ -26,6 +26,8 @@ import { DishService } from './services/dish.service';
 import { PromotionService } from './services/promotion.service';
 import { LeadersService } from './services/leaders-service.service';
 import { baseURL } from './shared/baseurl';
+import { ProcessHTTPMsgService } from './services/process-httpmsg.service';
+
 
 @NgModule({
   declarations: [
@@ -52,7 +54,7 @@ import { baseURL } from './shared/baseurl';
   entryComponents:[
     DialogComponent
   ],
-  providers: [DishService, PromotionService, LeadersService, {provide: "BaseURL" , useValue: baseURL}],
+  providers: [DishService, PromotionService, LeadersService, {provide: "BaseURL" , useValue: baseURL},ProcessHTTPMsgService],
   bootstrap: [AppComponent]
 })
 

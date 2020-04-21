@@ -27,9 +27,15 @@
         </mat-card-actions>
       </mat-card>
   </div>
-  <div [hidden]="dishi">
+
+  <div [hidden]="dishi || errMsgdishi">
     <mat-spinner></mat-spinner><h4>Loading..... Please Wait</h4>
   </div>
+  <div *ngIf="errMsgdishi">
+    <h2>Error</h2>
+    <h4>{{errMsgdishi}}</h4>
+  </div>
+
   <div fxFlex="40" *ngIf="dishi">
       <mat-card >
           <mat-card-header>
@@ -77,6 +83,13 @@
     
     </form>
   </mat-card>
+  </div>
+  <div [hidden]="dishi || errMsgdishi">
+    <mat-spinner></mat-spinner><h4>Loading..... Please Wait</h4>
+  </div>
+  <div *ngIf="errMsgdishi">
+    <h2>Error</h2>
+    <h4>{{errMsgdishi}}</h4>
   </div>
 
 </div>
