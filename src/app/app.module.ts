@@ -27,6 +27,7 @@ import { PromotionService } from './services/promotion.service';
 import { LeadersService } from './services/leaders-service.service';
 import { baseURL } from './shared/baseurl';
 import { ProcessHTTPMsgService } from './services/process-httpmsg.service';
+import { HighlightDirective } from './direcctives/highlight.directive';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { ProcessHTTPMsgService } from './services/process-httpmsg.service';
     HomeComponent,
     AboutComponent,
     ContactComponent,
-    DialogComponent
+    DialogComponent,
+    HighlightDirective
   ],
   imports: [
     BrowserModule,
