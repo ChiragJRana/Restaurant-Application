@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Dish} from '../shared/Dish';
 import { Observable } from 'rxjs';
-import { map , catchError } from 'rxjs/operators';
+import { map , catchError, delay } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { baseURL } from '../shared/baseUrl';
 import { ProcessHTTPMsgService } from '../services/process-httpmsg.service';
