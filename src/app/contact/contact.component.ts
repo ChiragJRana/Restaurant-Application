@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Feedback, ContactType } from '../shared/feedback';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { flyInOut } from '../animations/app.animation';
+import { flyInOut, expand } from '../animations/app.animation';
+import { FeedbackService } from '../services/feedback.service';
 
 @Component({
   selector: 'app-contact',
@@ -12,14 +13,17 @@ import { flyInOut } from '../animations/app.animation';
     'style': 'display: block;'
   },
   animations: [
-    flyInOut()
+    flyInOut(),
+    expand()
   ]
 })
 export class ContactComponent implements OnInit {
   feedback: Feedback;
   feedbackForm: FormGroup;
   contactType = ContactType;
-  
+  errMsg: string;
+  onload: boolean = false;
+  done : boolean = false;
   formErrors= {
     'firstname':'',
     'lastname': '',
@@ -33,7 +37,7 @@ export class ContactComponent implements OnInit {
     'firstname': {
       'required':      'First Name is required.',
       'minlength':     'First Name must be at least 2 characters long.',
-      'maxlength':     'FirstName cannot be more than 25 characters long.',
+      'maxlength':     'First Name cannot be more than 25 characters long.',
       'whitespace':    'Whitespaces are not allowed'
     },
     'lastname': {
@@ -57,33 +61,34 @@ export class ContactComponent implements OnInit {
 
   @ViewChild('fform') feedbackFormDirective;
 
-  constructor(private fb: FormBuilder){
+  constructor(private fb: FormBuilder,
+              private feedbackService: FeedbackService){
     this.createForm();
    }
 
   ngOnInit(): void { }
   createForm(){
     this.feedbackForm = this.fb.group({
-    firstname: ['',[ Validators.required, Validators.minLength(2), Validators.maxLength(25),this.noWhitespaceValidator]],
-      lastname: ['',[Validators.required, Validators.minLength(2), Validators.maxLength(25),this.noWhitespaceValidator]],
+      firstname: ['',[ Validators.required, Validators.minLength(2), Validators.maxLength(25)]],
+      lastname: ['',[Validators.required, Validators.minLength(2), Validators.maxLength(25)]],
       telnum: [,[Validators.required, Validators.pattern]],
-      email: ['',[Validators.required, Validators.email,this.noWhitespaceValidator]],
+      email: ['',[Validators.required, Validators.email]],
       agree: false,
       contacttype: 'None',
       message: ''
     });
-    
+    // this.feedback = this.feedbackForm.value();
     this.feedbackForm.valueChanges.subscribe(data => this.onValueChanged());
     
     this.onValueChanged(); // reset Validation Changes 
   }
   
-  public noWhitespaceValidator(control: FormControl) {
-    if (control.value.length < 2){ return null}
-    const isWhitespace = (control.value || '').trim().length <= 1;
-    const isValid = !isWhitespace;
-    return isValid ? null : { 'whitespace': true };
-  }
+  // public noWhitespaceValidator(control: FormControl) {
+  //   if (control.value.length < 2){ return null}
+  //   const isWhitespace = (control.value || '').trim().length <= 1;
+  //   const isValid = !isWhitespace;
+  //   return isValid ? null : { 'whitespace': true };
+  // }
 
   
   onValueChanged(data?: any) {
@@ -108,8 +113,21 @@ export class ContactComponent implements OnInit {
 
   
   onSubmit(){
+    this.onload = !this.onload;
     this.feedback = this.feedbackForm.value;
-    console.log(this.feedback);
+    this.feedbackService.submitFeedback(this.feedback)
+    .subscribe(
+      (feedback) => {
+        this.done = !this.done;
+        setTimeout(
+          (data) => {  
+            this.onload = !this.onload;
+            this.done = !this.done;
+          },5000);
+        this.feedback = feedback;
+      },
+      (error) => this.errMsg = error
+    )
     this.feedbackForm.reset({
       firstname: '',
       lastname: '',

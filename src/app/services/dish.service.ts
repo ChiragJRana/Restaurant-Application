@@ -27,8 +27,6 @@ export class DishService {
         map(dishes => dishes.map(dish => dish.id)),
         catchError(this.processHttpMsgService.handleErrors));
     }
-
-
     putDish(dish: Dish): Observable<Dish> {
       const httpOptions = {
           headers : new HttpHeaders(
