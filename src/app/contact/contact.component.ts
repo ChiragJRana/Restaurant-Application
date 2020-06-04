@@ -17,6 +17,7 @@ import { FeedbackService } from '../services/feedback.service';
     expand()
   ]
 })
+
 export class ContactComponent implements OnInit {
   feedback: Feedback;
   feedbackForm: FormGroup;
@@ -77,7 +78,7 @@ export class ContactComponent implements OnInit {
       contacttype: 'None',
       message: ''
     });
-    // this.feedback = this.feedbackForm.value();
+    this.feedback = this.feedbackForm.value;
     this.feedbackForm.valueChanges.subscribe(data => this.onValueChanged());
     
     this.onValueChanged(); // reset Validation Changes 
@@ -113,6 +114,7 @@ export class ContactComponent implements OnInit {
 
   
   onSubmit(){
+    
     this.onload = !this.onload;
     this.feedback = this.feedbackForm.value;
     this.feedbackService.submitFeedback(this.feedback)
@@ -126,7 +128,10 @@ export class ContactComponent implements OnInit {
           },5000);
         this.feedback = feedback;
       },
-      (error) => this.errMsg = error
+      (error) => {
+        this.errMsg = error;
+        this.onload = !this.onload;
+      }
     )
     this.feedbackForm.reset({
       firstname: '',
@@ -141,3 +146,12 @@ export class ContactComponent implements OnInit {
   }
 
 }
+
+
+
+
+
+
+
+
+

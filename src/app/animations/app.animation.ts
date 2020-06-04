@@ -13,7 +13,7 @@ export function flyInOut(){
         state('*',
             style({
                 opacity: 1,
-                transform: 'translateX(0)'
+                transform: 'translateX(0px)'
             })
         ),
         transition(':enter',[
@@ -37,7 +37,7 @@ export function expand(){
     return trigger('expand', [
         state('*', style({
             opacity: 1,
-            transform: 'transateX(0)'        
+            transform: 'translateX(0px)'        
         })),
         transition(':enter', [
             style({
@@ -46,8 +46,8 @@ export function expand(){
             }),
             animate('200ms ease-in',style({
                 opacity: 1,
-                transform: 'transateX(0)'        
-            })), 
+                transform: 'translateX(0px)'        
+            })),
         ])
     ]
     )

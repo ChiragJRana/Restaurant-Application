@@ -37,8 +37,8 @@
   </div>
   <div fxFlex fxFlexOffset="20px" class="form-size" >
     <h3>Send us your Feedback</h3>
-    <p>{{ feedbackForm.value | json}} {{feedbackForm.status}}</p>
-    <div [hidden]="onload">
+    <!-- <p>{{ feedbackForm.value | json}} {{feedbackForm.status}}</p> -->
+    <div [hidden]="onload" [@expand]>
     <form novalidate [formGroup]="feedbackForm" (ngSubmit)="onSubmit()" #fform="ngForm" >
       <p>
         <mat-form-field class="half-width">
@@ -84,12 +84,16 @@
       <button type="submit" [disabled]="fform.form.invalid" mat-button  class="background-primary text-floral-white">Submit</button>
     </form>
   </div>
-    <div [hidden]="!onload || done">
+  <div *ngIf="errMsg">
+    <h2>Error</h2>
+    <h4>{{errMsg}}</h4>
+  </div>
+    <div [hidden]="!onload || done" @expand>
       <h2>Submitting Form</h2>
       <mat-spinner></mat-spinner>
     </div>
 
-    <div [hidden]="!done">
+    <div [hidden]="!done" [@expand]='true'>
       <h3>Your Submission</h3>
       <p>First Name: {{feedback.firstname}}</p>
       <p>Last Name: {{feedback.lastname}}</p>
